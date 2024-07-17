@@ -7,7 +7,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         build-essential \
         git \
-        wget llibsm6 libxrender1 libfontconfig1 libxtst6 libxi6 \
+        wget libxrender1 libfontconfig1 libxtst6 libxi6 \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get autoremove -y \
     && apt-get clean
