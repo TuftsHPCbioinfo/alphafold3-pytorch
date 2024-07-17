@@ -7,7 +7,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         build-essential \
         git \
-        wget \
+        wget llibsm6 libxrender1 libfontconfig1 libxtst6 libxi6 \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get autoremove -y \
     && apt-get clean
@@ -26,3 +26,5 @@ ARG GIT_TAG=main
 RUN git clone https://github.com/lucidrains/alphafold3-pytorch . --branch ${GIT_TAG} \
     # && git checkout main \
     && python -m pip install .
+
+RUN python -m pip install ipython ipykernel
