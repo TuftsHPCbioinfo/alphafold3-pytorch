@@ -27,4 +27,18 @@ RUN git clone https://github.com/lucidrains/alphafold3-pytorch . --branch ${GIT_
     # && git checkout main \
     && python -m pip install .
 
+RUN echo '#!/usr/bin/env python' > /app/alphafold/scripts/temp.py && \
+    cat /app/alphafold/scripts/cluster_pdb_mmcifs.py >> /app/alphafold/scripts/temp.py && \
+    mv /app/alphafold/scripts/temp.py /app/alphafold/scripts/cluster_pdb_mmcifs.py && \
+    chmod +x /app/alphafold/scripts/cluster_pdb_mmcifs.py
+
+RUN echo '#!/usr/bin/env python' > /app/alphafold/scripts/temp.py && \
+    cat /app/alphafold/scripts/filter_pdb_mmcifs.py >> /app/alphafold/scripts/temp.py && \
+    mv /app/alphafold/scripts/temp.py /app/alphafold/scripts/filter_pdb_mmcifs.py && \
+    chmod +x /app/alphafold/scripts/filter_pdb_mmcifs.py
+
+ENV PATH=/app/alphafold/scripts/:$PATH
+
+## Install packages required for jupyter
 RUN python -m pip install ipython ipykernel
+
